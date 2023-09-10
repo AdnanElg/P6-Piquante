@@ -19,7 +19,7 @@ const jsonwebtoken = require('jsonwebtoken');
 exports.signup = (req, res, next) => {
     
     //chiffrer l'email dans la base de donnée :
-    const emailCryptoJS = cryptojs.HmacSHA256(req.body.email, bNLRxj3x2bQ944bNLRxj3x2bQ944).toString();
+    const emailCryptoJS = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
     
     //hasher le mot de passe, salet 10x combien de fois sera exécuté l'algorithme de hashage :
     bcrypt.hash(req.body.password, 10)
@@ -45,7 +45,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 
    //chiffrer l'email dans la base de donnée s'il existe :
-   const emailCryptoJS = cryptojs.HmacSHA256(req.body.email, `${process.env.bNLRxj3x2bQ944bNLRxj3x2bQ944}`).toString();
+   const emailCryptoJS = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
    
    User.findOne({email: emailCryptoJS})
         .then((user) => {
@@ -67,7 +67,7 @@ exports.login = (req, res, next) => {
                             //user id :
                             {userId: user._id},
                             //la clé de chiffrement du token
-                            bNLRxx4j4b239QbNLRxx4j4b239Q,
+                            `${process.env.JWT_KEY_TOKEN}`,
                             //le temps de validité du token
                             {expiresIn:'24h'}
                         )
