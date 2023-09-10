@@ -15,7 +15,7 @@ export class SaucesService {
               private auth: AuthService) {}
 
   getSauces() {
-    this.http.get<Sauce[]>('https://piquante-bd.vercel.app/api/sauces/').pipe(
+    this.http.get<Sauce[]>('https://piquante-bd.vercel.app/api/sauces').pipe(
       tap(sauces => this.sauces$.next(sauces)),
       catchError(error => {
         console.error(error.error.message);
@@ -54,7 +54,7 @@ export class SaucesService {
     const formData = new FormData();
     formData.append('sauce', JSON.stringify(sauce));
     formData.append('image', image);
-    return this.http.post<{ message: string }>('https://piquante-bd.vercel.app/api/sauces/', formData).pipe(
+    return this.http.post<{ message: string }>('https://piquante-bd.vercel.app/api/sauces', formData).pipe(
       catchError(error => throwError(error.error.message))
     );
   }
