@@ -53,9 +53,7 @@ app.use(helmet({crossOriginResourcePolicy: false,}));
 
 //Routes :
 app.use('/images', express.static(path.join(__dirname,'images')));
-setTimeout(() => {
-    app.use('/api/auth', userRoutes);
-}, 10000);
+app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 
 
