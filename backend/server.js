@@ -1,6 +1,6 @@
 //SERVER :
 
-const http = require('http');
+const http = require('https');
 const app = require('./app');
 const dotenv = require("dotenv").config();
 
@@ -18,7 +18,7 @@ const normalizePort = val => {
 };
 
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 
