@@ -15,7 +15,7 @@ export class SaucesService {
               private auth: AuthService) {}
 
   getSauces() {
-    this.http.get<Sauce[]>('http://localhost:3000/api/sauces').pipe(
+    this.http.get<Sauce[]>('https://p6-piquante.vercel.app/api/sauces').pipe(
       tap(sauces => this.sauces$.next(sauces)),
       catchError(error => {
         console.error(error.error.message);
@@ -25,7 +25,7 @@ export class SaucesService {
   }
 
   getSauceById(id: string) {
-    return this.http.get<Sauce>('http://localhost:3000/api/sauces/' + id).pipe(
+    return this.http.get<Sauce>('https://p6-piquante.vercel.app/api/sauces/' + id).pipe(
       catchError(error => throwError(error.error.message))
     );
   }
