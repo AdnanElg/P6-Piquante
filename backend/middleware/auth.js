@@ -9,7 +9,7 @@ const dotenv = require("dotenv").config();
 module.exports = (req, res, next) => {
    try {
       const token = req.headers.authorization.split(' ')[1];
-      const decodedToken = jsonwebtoken.verify(token, `${process.env.JWT_KEY_TOKEN}`);
+      const decodedToken = jsonwebtoken.verify(token, `bNLRxx4j4b239QbNLRxx4j4b239Q`);
       const userId = decodedToken.userId;
        
          
