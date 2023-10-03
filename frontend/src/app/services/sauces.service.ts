@@ -14,7 +14,7 @@ export class SaucesService {
 
   getSauces() {
     this.http
-      .get<Sauce[]>("https://piquante-bd.vercel.app/api/sauces/")
+      .get<Sauce[]>("https://piquante-bd.vercel.app/api/sauces")
       .pipe(
         tap((sauces) => this.sauces$.next(sauces)),
         catchError((error) => {
@@ -61,7 +61,7 @@ export class SaucesService {
     formData.append("image", image);
     return this.http
       .post<{ message: string }>(
-        "https://piquante-bd.vercel.app/api/sauces/",
+        "https://piquante-bd.vercel.app/api/sauces",
         formData
       )
       .pipe(catchError((error) => throwError(error.error.message)));

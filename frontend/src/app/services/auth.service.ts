@@ -15,7 +15,7 @@ export class AuthService {
 
   createUser(email: string, password: string) {
     return this.http.post<{ message: string }>(
-      "https://piquante-bd.vercel.app/api/auth/signup/",
+      "https://piquante-bd.vercel.app/api/auth/signup",
       { email: email, password: password }
     );
   }
@@ -31,7 +31,7 @@ export class AuthService {
   loginUser(email: string, password: string) {
     return this.http
       .post<{ userId: string; token: string }>(
-        "https://piquante-bd.vercel.app/api/auth/login/",
+        "https://piquante-bd.vercel.app/api/auth/login",
         { email: email, password: password }
       )
       .pipe(
