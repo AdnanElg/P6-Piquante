@@ -18,7 +18,7 @@ const normalizePort = val => {
 };
 
 
-const port = normalizePort(process.env.PORT || 'https://piquante-bd.vercel.app/');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 
