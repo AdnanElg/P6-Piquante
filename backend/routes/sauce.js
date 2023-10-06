@@ -8,7 +8,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 //Importation du fichier multer de middlware pour la gestion des fichier images:
-const multer = require('../middleware/multer');
+const multer = require('../middleware/multer').default;
 
 //Importation de fichier sauce.js de controllers :
 const sauceControllers = require('../controllers/sauce');

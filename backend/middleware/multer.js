@@ -1,34 +1,33 @@
-const multer = require("multer");
+//multer : pour gérer les requêtes HTTP avec envoie de fichier :
 
+//Importation du package multer :
+import multer, { diskStorage } from 'multer';
+
+
+//le dictionnaire de MIME_TYPES :
 const MIME_TYPES = {
-  "image/jpg": "jpg",
-  "image/jpeg": "jpg",
-  "image/png": "png",
+    'image/jpg' : 'jpg',
+    'image/jpeg': 'jpeg',
+    'image/png': 'png',
+    'image/gif': 'gif'
 };
 
-const storage = multer.diskStorage({
-  // Creating configuration object for multer
-  destination: (req, file, callback) => {
-    callback(null, "images");
-  },
-  filename: (req, file, callback) => {
-    const name = file.originalname.split(".")[0].split(" ").join("_");
-    const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now() + "." + extension); // Creating an name for the image
-  },
-});
 
-const fileFilter = (req, file, callback) => {
-  const extension = MIME_TYPES[file.mimetype]; // Fiding the uploaded file's mine type
-  if (extension === "jpg" || extension === "png") {
-    callback(null, true); // Making sure it is a png or a jpg
-  } else {
-    callback("Erreur : Mauvais type de fichier", false);
-  }
-};
+//la destination du fichier (repertoire) et générer un nom de fichier unique :
+const storage = diskStorage({
+    //destinnation de stockage du fichier :
+    destination: (req, file, callback) => {
+        callback(null, 'images');
+    },
+    
+    filename: (req, file, callback) => {
+        //supprimer les espace dans le nom du fichier :
+        const name = file.originalname.split(' ').join('_');
+        const extension = MIME_TYPES[file.mimetype]
+        callback(null, name + Date.now() + '.' + extension);
+    }
+})
 
-module.exports = multer({
-  storage, // Adding our multer object
-  limits: { fileSize: 104857600 }, // Setting a max file size to be upload to 100 Mo
-  fileFilter, // Applying extention filter
-}).single("image"); // Making sure the file uploaded by user is a single file, note several
+ 
+//Exportation du middleware multer : 
+export default multer({storage}).single('image');
