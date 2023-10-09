@@ -1,7 +1,7 @@
 //multer : pour gérer les requêtes HTTP avec envoie de fichier :
 
 //Importation du package multer :
-import multer, { diskStorage } from 'multer';
+const multer = require('multer');
 
 
 //le dictionnaire de MIME_TYPES :
@@ -14,7 +14,7 @@ const MIME_TYPES = {
 
 
 //la destination du fichier (repertoire) et générer un nom de fichier unique :
-const storage = diskStorage({
+const storage = multer.diskStorage({
     //destinnation de stockage du fichier :
     destination: (req, file, callback) => {
         callback(null, 'images');
@@ -30,4 +30,4 @@ const storage = diskStorage({
 
  
 //Exportation du middleware multer : 
-export default multer({storage}).single('image');
+module.exports = multer({storage}).single('image');
